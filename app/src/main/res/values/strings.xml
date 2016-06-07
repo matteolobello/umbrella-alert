@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Umbrella Alert</string>
+    <string name="you_live_in">You live in</string>
+    <string name="right">right?</string>
+    <string name="not_my_city">That\'s not my city!</string>
+    <string name="when_to_receive_notification">When do you want to receive the notification?</string>
+    <string name="set_hour">Set hour</string>
+    <string name="select_city">Select city, please</string>
+    <string name="set_city">Set city</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="done">Done</string>
+    <string name="done_final_message">Done!\nEverything\'s set up!</string>
+    <string name="exit">Save and Exit</string>
+    <string name="everyday">Every day</string>
+    <string name="warning">Warning</string>
+    <string name="alarm_already_set">There are other notifications set. Do you want to keep them?</string>
+    <string name="keep">Keep</string>
+    <string name="discard">Discard</string>
+    <string name="use_celsius">Use Celsius</string>
+    <string name="select">Select</string>
+    <string name="next">Next</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="oh_no">Oh no!</string>
+    <string name="enable_wifi">Enable WiFi before the notification is sent</string>
+    <string name="it_will_rain">It\'ll rain!</string>
+
+    <string name="celsius" translatable="false">Celsius</string>
+    <string name="fahrenheit" translatable="false">Fahrenheit</string>
+</resources>
