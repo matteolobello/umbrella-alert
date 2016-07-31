@@ -61,7 +61,7 @@ public class CityFragment extends Fragment {
     }
 
     private void setupUi() {
-        if (addresses != null && addresses.size() > 0 && !forceFindCity) {
+        if (addresses != null && addresses.size() > 0 && !addresses.get(0).getLocality().equals("null") && !forceFindCity) {
             Address address = addresses.get(0);
 
             String city = address.getLocality();
