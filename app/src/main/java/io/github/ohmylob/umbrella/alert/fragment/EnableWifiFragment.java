@@ -19,7 +19,7 @@ public class EnableWifiFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.enable_wifi_fragment, container, false);
 
-        CheckBox checkBox = ((CheckBox) rootView.findViewById(R.id.enable_wifi));
+        CheckBox checkBox = (CheckBox) rootView.findViewById(R.id.enable_wifi);
 
         String enableWiFiString = SharedPreferencesManager.getValue(getContext(), SharedPreferencesManager.ENABLE_WIFI);
         if (!enableWiFiString.equals("0")) {

@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import io.github.ohmylob.umbrella.alert.debug.Log;
+import io.github.ohmylob.umbrella.alert.debug.Logger;
 
 public class SharedPreferencesManager {
 
@@ -32,7 +32,7 @@ public class SharedPreferencesManager {
         HashMap<String, String> hashMap = new HashMap<>();
 
         for (int i = 0; i < keys.length; i++) {
-            Log.print(keys[i] + " -> " + values[i]);
+            Logger.print(keys[i] + " -> " + values[i]);
             hashMap.put(keys[i], values[i]);
         }
 

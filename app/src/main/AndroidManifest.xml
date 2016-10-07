@@ -33,5 +33,4 @@
 
         <receiver android:name="io.github.ohmylob.umbrella.alert.receiver.WeatherReceiver" />
     </application>
-
 </manifest>

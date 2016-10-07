@@ -17,8 +17,7 @@ import io.github.ohmylob.umbrella.alert.preference.SharedPreferencesManager;
 public class DoneFragment extends Fragment {
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             final Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.done_fragment, container, false);
 
         rootView.findViewById(R.id.exit).setOnClickListener(new View.OnClickListener() {
@@ -30,7 +29,7 @@ public class DoneFragment extends Fragment {
                             .setAction(R.string.select, new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    ((MainActivity) getActivity()).viewPager.setCurrentItem(0);
+                                    ((MainActivity) getActivity()).getViewPager().setCurrentItem(0);
                                 }
                             }).show();
                     return;
@@ -41,7 +40,7 @@ public class DoneFragment extends Fragment {
                             .setAction(R.string.select, new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    ((MainActivity) getActivity()).viewPager.setCurrentItem(1);
+                                    ((MainActivity) getActivity()).getViewPager().setCurrentItem(1);
                                 }
                             }).show();
                     return;

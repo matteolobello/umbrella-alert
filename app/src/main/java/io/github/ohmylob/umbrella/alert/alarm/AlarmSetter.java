@@ -7,7 +7,7 @@ import android.content.Intent;
 
 import java.util.Calendar;
 
-import io.github.ohmylob.umbrella.alert.debug.Log;
+import io.github.ohmylob.umbrella.alert.debug.Logger;
 import io.github.ohmylob.umbrella.alert.preference.SharedPreferencesManager;
 import io.github.ohmylob.umbrella.alert.receiver.WeatherReceiver;
 
@@ -45,7 +45,7 @@ public class AlarmSetter {
             calendar.add(Calendar.DAY_OF_MONTH, 1);
         }
 
-        Log.print("Alarm set on " + calendar.get(Calendar.DAY_OF_MONTH) + "/"
+        Logger.print("Alarm set on " + calendar.get(Calendar.DAY_OF_MONTH) + "/"
                 + (calendar.get(Calendar.MONTH) + 1) + "/" + calendar.get(Calendar.YEAR) + " at " + hour + ":" + minute);
 
         calendar.set(Calendar.HOUR_OF_DAY, hour);
@@ -58,10 +58,6 @@ public class AlarmSetter {
     }
 
     public void destroyAlarms() {
-        try {
-            alarmManager.cancel(pendingIntent);
-        } catch (Exception e) {
-            Log.print("Couldn't remove previous alarms -> " + e.toString());
-        }
+        alarmManager.cancel(pendingIntent);
     }
 }

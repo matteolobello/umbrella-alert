@@ -22,7 +22,9 @@ import android.widget.Toast;
 import com.afollestad.assent.Assent;
 import com.afollestad.assent.AssentCallback;
 import com.afollestad.assent.PermissionResultSet;
+
 import com.felipecsl.gifimageview.library.GifImageView;
+
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 
@@ -43,23 +45,45 @@ import io.github.ohmylob.umbrella.alert.web.NetworkManager;
 
 public class MainActivity extends AppCompatActivity {
 
+    /**
+     * Place AutoComplete Activity Result Code
+     */
     public static final int PLACE_AUTOCOMPLETE_REQUEST_CODE = 300;
 
+    /**
+     * Location Listener
+     */
     private static final LocationListener LOCATION_LISTENER = new LocationListener() {
         @Override
-        public void onLocationChanged(Location location) {}
+        public void onLocationChanged(Location location) {
+        }
+
         @Override
-        public void onStatusChanged(String s, int i, Bundle bundle) {}
+        public void onStatusChanged(String s, int i, Bundle bundle) {
+        }
+
         @Override
-        public void onProviderEnabled(String s) {}
+        public void onProviderEnabled(String s) {
+        }
+
         @Override
-        public void onProviderDisabled(String s) {}
+        public void onProviderDisabled(String s) {
+        }
     };
 
-    public ViewPager viewPager;
+    /**
+     * Main ViewPager
+     */
+    private ViewPager viewPager;
 
+    /**
+     * The Adapter of the ViewPager
+     */
     private ViewPagerAdapter viewPagerAdapter;
 
+    /**
+     * Application Fragments
+     */
     private Fragment cityFragment;
     private Fragment hourFragment;
     private Fragment wifiFragment;
@@ -68,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Set AppTheme as we have implemented a launch screen
         setTheme(R.style.AppTheme);
 
         super.onCreate(savedInstanceState);
@@ -118,6 +141,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * A Method to get Current Location
+     *
+     * @return the Location object
+     */
     private Location getLocation() {
         try {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -157,6 +185,12 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }
 
+    /**
+     * Get City name giving the Location object
+     *
+     * @param location the Location object
+     * @return An Array of Addresses
+     */
     private List<Address> getCity(Location location) {
         if (location == null) {
             return null;
@@ -173,6 +207,11 @@ public class MainActivity extends AppCompatActivity {
         return results;
     }
 
+    /**
+     * Setup App UI
+     *
+     * @param results the List of Addresses
+     */
     private void setupUi(List<Address> results) {
         cityFragment = new CityFragment(results);
         hourFragment = new HourPickerFragment();
@@ -195,6 +234,11 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(viewPagerAdapter);
     }
 
+    /**
+     * Get the ParallaxPageTransformer
+     *
+     * @return the ParallaxPageTransformer
+     */
     private ParallaxPageTransformer buildParallaxPageTransformer() {
         return new ParallaxPageTransformer()
                 // First fragment
@@ -218,15 +262,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * These two public methods are called by fragments casting
-     * the getActivity() method to this MainActivity class.
+     * Scroll to next page
      */
     public void nextPage() {
         viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
     }
 
+    /**
+     * Check if the app has GPS permissions
+     *
+     * @return true if the app has GPS permissions
+     */
     public boolean checkLocationPermissions() {
         return Assent.isPermissionGranted(Assent.ACCESS_FINE_LOCATION);
+    }
+
+    /**
+     * @return the ViewPager
+     */
+    public ViewPager getViewPager() {
+        return viewPager;
     }
 
     @Override

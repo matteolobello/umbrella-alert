@@ -15,3 +15,6 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-keepattributes EnclosingMethod
+-dontwarn okio.**
+-dontwarn retrofit2.Platform$Java8

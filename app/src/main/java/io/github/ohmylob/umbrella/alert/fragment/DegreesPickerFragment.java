@@ -15,8 +15,7 @@ import io.github.ohmylob.umbrella.alert.preference.SharedPreferencesManager;
 public class DegreesPickerFragment extends Fragment {
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             final Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.degrees_picker_fragment, container, false);
 
         final RadioButton useCelsiusRadioButton = (RadioButton) rootView.findViewById(R.id.use_celsius);

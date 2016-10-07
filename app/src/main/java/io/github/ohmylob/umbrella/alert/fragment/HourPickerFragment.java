@@ -25,10 +25,8 @@ public class HourPickerFragment extends Fragment implements TimePickerDialog.OnT
     private CheckBox everyDayCheckBox;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             final Bundle savedInstanceState) {
-
-        final View rootView = inflater.inflate(R.layout.hour_picker_fragment, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.hour_picker_fragment, container, false);
 
         everyDayCheckBox = (CheckBox) rootView.findViewById(R.id.every_day);
 

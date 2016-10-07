@@ -11,12 +11,15 @@ import android.net.NetworkInfo;
 import android.os.Handler;
 import android.support.v4.app.NotificationCompat;
 import android.widget.RemoteViews;
+import android.widget.Toast;
 
+import github.vatsal.easyweather.Helper.TempUnitConverter;
+import github.vatsal.easyweather.Helper.WeatherCallback;
+import github.vatsal.easyweather.retrofit.models.WeatherResponseModel;
 import io.github.ohmylob.umbrella.alert.R;
 import io.github.ohmylob.umbrella.alert.alarm.AlarmSetter;
-import io.github.ohmylob.umbrella.alert.debug.Log;
+import io.github.ohmylob.umbrella.alert.debug.Logger;
 import io.github.ohmylob.umbrella.alert.preference.SharedPreferencesManager;
-import io.github.ohmylob.umbrella.alert.weather.Weather;
 import io.github.ohmylob.umbrella.alert.weather.WeatherChecker;
 import io.github.ohmylob.umbrella.alert.weather.WeatherConditions;
 import io.github.ohmylob.umbrella.alert.web.NetworkManager;
@@ -35,13 +38,14 @@ public class WeatherReceiver extends BroadcastReceiver {
     private final BroadcastReceiver wifiBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.print("WiFiReceiver -> onReceive");
+            Logger.print("WiFiReceiver -> onReceive");
 
             ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
             if (networkInfo != null && networkInfo.getType() == ConnectivityManager.TYPE_WIFI
                     && networkInfo.isConnected()) {
-                Log.print("WiFi Connected");
+                Logger.print("WiFi Connected");
+
                 checkWeather();
             }
         }
@@ -51,7 +55,7 @@ public class WeatherReceiver extends BroadcastReceiver {
     public void onReceive(final Context context, Intent intent) {
         this.context = context;
 
-        Log.print("WeatherReceiver -> onReceive");
+        Logger.print("WeatherReceiver -> onReceive");
 
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
@@ -69,7 +73,7 @@ public class WeatherReceiver extends BroadcastReceiver {
                 @Override
                 public void run() {
                     if (!weatherChecked) {
-                        // force check weather if after 10 seconds we still haven't done it.
+                        // force check weather if after 10 seconds we still haven't done it
                         checkWeather();
                     }
                 }
@@ -84,12 +88,15 @@ public class WeatherReceiver extends BroadcastReceiver {
     private void checkWeather() {
         if (!weatherChecked) {
             if (NetworkManager.isNetworkAvailable(context)) {
-                WeatherChecker.check(context, new WeatherChecker.OnLoadListener() {
+                WeatherChecker.check(context, new WeatherCallback() {
                     @Override
-                    public void onLoadComplete(Weather weather) {
-                        if (weather != null) {
-                            showNotification(weather);
-                        }
+                    public void success(WeatherResponseModel response) {
+                        showNotification(response);
+                    }
+
+                    @Override
+                    public void failure(String message) {
+                        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -119,18 +126,26 @@ public class WeatherReceiver extends BroadcastReceiver {
                 || conditions.equals(WeatherConditions.THUNDERSTORM);
     }
 
-    private void showNotification(Weather weather) {
-        Log.print("Weather conditions -> " + weather.getConditions());
+    private void showNotification(WeatherResponseModel response) {
+        boolean useCelsius = Boolean.valueOf(SharedPreferencesManager.getValue(context, SharedPreferencesManager.USE_CELSIUS));
 
-        if (checkRain(weather.getConditions())) {
-            Log.print("Sending notification...");
+        String weatherMain = response.getWeather()[0].getMain();
+        String kelvinTemp = String.valueOf(response.getMain().getTemp());
+
+        String temp = String.valueOf(useCelsius
+                ? TempUnitConverter.convertToCelsius(kelvinTemp)
+                : TempUnitConverter.convertToFahrenheit(kelvinTemp));
+
+        Logger.print("Weather conditions -> " + response.getMain());
+
+        if (checkRain(weatherMain)) {
+            Logger.print("Sending notification...");
 
             RemoteViews contentView = new RemoteViews(context.getPackageName(), R.layout.notification_layout);
-            contentView.setTextViewText(R.id.temperature, weather.getCurrentTemperature() +
-                    (Boolean.valueOf(SharedPreferencesManager.getValue(context, SharedPreferencesManager.USE_CELSIUS))
-                            ? "°C"
-                            : "°F"));
-            contentView.setTextViewText(R.id.conditions, weather.getConditions());
+            contentView.setTextViewText(R.id.temperature, temp + (useCelsius
+                    ? "°C"
+                    : "°F"));
+            contentView.setTextViewText(R.id.conditions, weatherMain);
 
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
                     .setSmallIcon(R.drawable.weather_notif)
