@@ -4,7 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.location.Address;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,8 +65,8 @@ public class CityFragment extends Fragment {
 
             String city = address.getLocality();
 
-            youLiveIn = (TextView) rootView.findViewById(R.id.city);
-            notMyCity = (TextView) rootView.findViewById(R.id.not_my_city);
+            youLiveIn = rootView.findViewById(R.id.city);
+            notMyCity = rootView.findViewById(R.id.not_my_city);
 
             youLiveIn.setText(Html.fromHtml(city + ","));
 
@@ -116,7 +116,7 @@ public class CityFragment extends Fragment {
     }
 
     private void loadWithoutPermissions() {
-        setCityButton = (Button) rootView.findViewById(R.id.set_city);
+        setCityButton = rootView.findViewById(R.id.set_city);
 
         String cityString = SharedPreferencesManager.getValue(getContext(), SharedPreferencesManager.CITY);
         if (!cityString.equals("0")) {

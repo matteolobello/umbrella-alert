@@ -4,18 +4,13 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary">
 
-    <FrameLayout
+    <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/sun" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/sun" />
-    </FrameLayout>
-
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/when_receive_notification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,9 +21,9 @@
         android:padding="16dp"
         android:text="@string/done_final_message"
         android:textColor="@android:color/white"
-        android:textSize="36dp" />
+        android:textSize="36sp" />
 
-    <android.support.v7.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/exit"
         style="@style/Button"
         android:layout_width="wrap_content"

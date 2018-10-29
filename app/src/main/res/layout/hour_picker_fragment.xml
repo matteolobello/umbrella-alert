@@ -4,16 +4,11 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary">
 
-    <FrameLayout
+    <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/time" />
-    </FrameLayout>
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/time" />
 
     <TextView
         android:id="@+id/when_receive_notification"
@@ -26,20 +21,19 @@
         android:padding="16dp"
         android:text="@string/when_to_receive_notification"
         android:textColor="@android:color/white"
-        android:textSize="36dp" />
+        android:textSize="30sp" />
 
-    <android.support.v7.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/set_hour"
         style="@style/Button"
         android:layout_width="wrap_content"
         android:layout_height="36dp"
         android:layout_below="@+id/when_receive_notification"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="4dp"
         android:gravity="center"
         android:text="@string/set_hour" />
 
-    <CheckBox
+    <androidx.appcompat.widget.AppCompatCheckBox
         android:id="@+id/every_day"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,4 +43,5 @@
         android:checked="false"
         android:text="@string/everyday"
         android:theme="@style/CheckBox" />
+
 </RelativeLayout>

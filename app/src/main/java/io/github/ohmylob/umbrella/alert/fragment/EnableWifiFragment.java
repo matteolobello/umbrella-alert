@@ -1,8 +1,8 @@
 package io.github.ohmylob.umbrella.alert.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +19,7 @@ public class EnableWifiFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.enable_wifi_fragment, container, false);
 
-        CheckBox checkBox = (CheckBox) rootView.findViewById(R.id.enable_wifi);
+        CheckBox checkBox = rootView.findViewById(R.id.enable_wifi);
 
         String enableWiFiString = SharedPreferencesManager.getValue(getContext(), SharedPreferencesManager.ENABLE_WIFI);
         if (!enableWiFiString.equals("0")) {

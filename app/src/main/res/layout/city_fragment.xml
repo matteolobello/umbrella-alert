@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:autofit="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary">
 
-    <FrameLayout
+    <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/location" />
-    </FrameLayout>
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/location" />
 
     <TextView
         android:id="@+id/you_live_in"
@@ -26,7 +21,7 @@
         android:gravity="center"
         android:text="@string/you_live_in"
         android:textColor="@android:color/white"
-        android:textSize="38dp" />
+        android:textSize="35sp" />
 
     <me.grantland.widget.AutofitTextView
         android:id="@+id/city"
@@ -40,12 +35,12 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:singleLine="false"
-        android:text="/???"
+        android:text="\???"
         android:textColor="@android:color/white"
-        android:textSize="50dp"
-        autofit:minTextSize="14dp" />
+        android:textSize="48sp"
+        app:minTextSize="14dp" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -54,20 +49,19 @@
         android:gravity="center"
         android:text="@string/right"
         android:textColor="@android:color/white"
-        android:textSize="38dp" />
+        android:textSize="35sp" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/not_my_city"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="16dp"
+        android:layout_centerHorizontal="true"
         android:gravity="center"
+        android:padding="16dp"
         android:text="@string/not_my_city"
         android:textColor="@android:color/white"
-        android:textSize="32dp" />
+        android:textSize="24sp"
+        android:foreground="?attr/selectableItemBackground" />
+
 </RelativeLayout>

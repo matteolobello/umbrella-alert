@@ -3,6 +3,7 @@ package io.github.ohmylob.umbrella.alert.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -10,12 +11,13 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
@@ -97,11 +99,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimary));
+        getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.colorNavBar));
+
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null)
             actionBar.hide();
 
-        viewPager = (ViewPager) findViewById(R.id.pager);
+        viewPager = findViewById(R.id.pager);
 
         Assent.setActivity(MainActivity.this, MainActivity.this);
 
@@ -130,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
                 inputStream.read(bytes);
                 inputStream.close();
 
-                GifImageView gifView = (GifImageView) findViewById(R.id.no_internet_umbrella);
+                GifImageView gifView = findViewById(R.id.no_internet_umbrella);
                 if (gifView != null) {
                     gifView.setBytes(bytes);
                     gifView.startAnimation();

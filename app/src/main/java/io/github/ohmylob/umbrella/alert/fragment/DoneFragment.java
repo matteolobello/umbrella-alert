@@ -2,12 +2,13 @@ package io.github.ohmylob.umbrella.alert.fragment;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import io.github.ohmylob.umbrella.alert.R;
 import io.github.ohmylob.umbrella.alert.activity.MainActivity;

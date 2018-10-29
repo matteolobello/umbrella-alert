@@ -1,9 +1,8 @@
 package io.github.ohmylob.umbrella.alert.viewpager;
 
-import android.support.v4.view.ViewPager;
-import android.view.View;
+import androidx.viewpager.widget.ViewPager;
 
-import com.nineoldandroids.view.ViewHelper;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,8 +40,7 @@ public class ParallaxPageTransformer implements ViewPager.PageTransformer {
 
         if (position < -1) {
             // This page is way off-screen to the left.
-            ViewHelper.setAlpha(view, 1);
-
+            view.setAlpha(1);
         } else if (position <= 1 && mViewsToParallax != null) { // [-1,1]
 
             for (ParallaxTransformInformation parallaxTransformInformation : mViewsToParallax) {
@@ -51,21 +49,16 @@ public class ParallaxPageTransformer implements ViewPager.PageTransformer {
             }
         } else {
             // This page is way off-screen to the right.
-            ViewHelper.setAlpha(view, 1);
+            view.setAlpha(1);
         }
     }
 
     private void applyParallaxEffect(View view, float position, int pageWidth, ParallaxTransformInformation information, boolean isEnter) {
-
         if (information.isValid() && view.findViewById(information.resource) != null) {
             if (isEnter && !information.isEnterDefault()) {
-
-                ViewHelper.setTranslationX(view.findViewById(information.resource), (position * (pageWidth / information.parallaxEnterEffect)));
-
+                view.findViewById(information.resource).setTranslationX((position * (pageWidth / information.parallaxEnterEffect)));
             } else if (!isEnter && !information.isExitDefault()) {
-
-                ViewHelper.setTranslationX(view.findViewById(information.resource), (position * (pageWidth / information.parallaxExitEffect)));
-
+                view.findViewById(information.resource).setTranslationX(position * (pageWidth / information.parallaxExitEffect));
             }
         }
     }
@@ -80,7 +73,7 @@ public class ParallaxPageTransformer implements ViewPager.PageTransformer {
      */
     public static class ParallaxTransformInformation {
 
-        public static final float PARALLAX_EFFECT_DEFAULT = -101.1986f;
+        private static final float PARALLAX_EFFECT_DEFAULT = -101.1986f;
 
         int resource = -1;
         float parallaxEnterEffect = 1f;

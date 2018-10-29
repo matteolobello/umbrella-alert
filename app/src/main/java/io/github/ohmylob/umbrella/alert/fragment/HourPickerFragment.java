@@ -1,7 +1,7 @@
 package io.github.ohmylob.umbrella.alert.fragment;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +28,7 @@ public class HourPickerFragment extends Fragment implements TimePickerDialog.OnT
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.hour_picker_fragment, container, false);
 
-        everyDayCheckBox = (CheckBox) rootView.findViewById(R.id.every_day);
+        everyDayCheckBox = rootView.findViewById(R.id.every_day);
 
         String everyDayString = SharedPreferencesManager.getValue(getContext(), SharedPreferencesManager.EVERY_DAY);
         if (!everyDayString.equals("0")) {
