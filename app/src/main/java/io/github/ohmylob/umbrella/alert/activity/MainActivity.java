@@ -94,13 +94,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.AppTheme);
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimary));
-        getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.colorNavBar));
+        setTheme(R.style.AppTheme);
+        setContentView(R.layout.activity_main);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null)

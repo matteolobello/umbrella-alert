@@ -4,6 +4,9 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.location.Address;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -43,20 +46,25 @@ public class CityFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(
                 addresses != null && !forceFindCity
                         ? R.layout.city_fragment
                         : R.layout.city_fragment_find, container, false
         );
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        rootView = view;
 
         if (forceFindCity) {
             loadWithoutPermissions();
         } else {
             setupUi();
         }
-
-        return rootView;
     }
 
     private void setupUi() {
@@ -112,6 +120,7 @@ public class CityFragment extends Fragment {
             reload(false);
             return false;
         }
+
         return true;
     }
 
